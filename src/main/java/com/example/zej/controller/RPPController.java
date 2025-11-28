@@ -21,9 +21,6 @@ import com.example.zej.utils.MessageModel;
 public class RPPController {
 
   @Autowired
-  RPPService rppService;
-
-  @Autowired
   RPPRepo rppRepo;
 
   @GetMapping
@@ -35,7 +32,7 @@ public class RPPController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Object> findById(@PathVariable Long id) {
+  public ResponseEntity<Object> findById(@PathVariable String id) {
     MessageModel messageModel = new MessageModel();
     var rpp = rppRepo.findById(id);
     if (rpp.isEmpty()) {
@@ -57,7 +54,7 @@ public class RPPController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody RPP rpp) {
+  public ResponseEntity<Object> update(@PathVariable String id, @RequestBody RPP rpp) {
     MessageModel messageModel = new MessageModel();
     var existing = rppRepo.findById(id);
     if (existing.isEmpty()) {
@@ -74,7 +71,7 @@ public class RPPController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Object> delete(@PathVariable Long id) {
+  public ResponseEntity<Object> delete(@PathVariable String id) {
     MessageModel messageModel = new MessageModel();
     if (!rppRepo.existsById(id)) {
       messageModel.setMessage("RPP tidak ditemukan");
